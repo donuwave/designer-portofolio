@@ -1,0 +1,27 @@
+{
+  "greeting": {
+    "title": "Привет! Я Артем,\nпродуктовый дизайнер",
+    "text": "Продуктовый дизайнер с мышлением\nпродакт-менеджера и системным\nподходом к решению задач. Улучшаю\nпользовательский опыт и\nвизуальное качество продуктов\n(look & feel), создаю и развиваю\nдизайн-системы. Работаю на стыке\nинтересов бизнеса, пользователей\nи команды разработки, помогая\nнаходить эффективные и\nмасштабируемые решения"
+  },
+  "contacts": {
+    "title": "Мои Контакты",
+    "items": [
+      {
+        "label": "telegram:",
+        "value": "@Artyom_Kartsev",
+        "href": "https://t.me/Artyom_Kartsev"
+      },
+      {
+        "label": "e-mail:",
+        "value": "hi_artyom.kartsev@mail.ru",
+        "href": "mailto:hi_artyom.kartsev@mail.ru"
+      },
+      {
+        "label": "inst:",
+        "value": "@Artyom_Kartsev",
+        "href": "https://instagram.com/Artyom_Kartsev"
+      }
+    ],
+    "updatedText": "обновлено в 2026"
+  }
+}
