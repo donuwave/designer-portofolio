@@ -1,13 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
-import dotenv from 'dotenv';
 
 import { WithProviders } from './(providers)';
 
 import './(theme)/global.css';
-
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const mono = JetBrains_Mono({
   weight: ['400', '700'],

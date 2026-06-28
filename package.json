@@ -3,15 +3,15 @@
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f .env.dev.local next dev -p 8080",
-    "build:dev": "env-cmd -f .env.dev next build",
-    "build:prod": "env-cmd -f .env.prod next build",
+    "dev": "env-cmd --silent -f .env.dev.local next dev -p 8080",
+    "build:dev": "env-cmd --silent -f .env.dev next build",
+    "build:prod": "env-cmd --silent -f .env.prod next build",
     "start": "next start -p 8080",
     "test": "jest",
     "lint": "cross-env NODE_ENV=production && next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc",
     "clear": "rm -rf ./node_modules ./.yarn/global yarn.lock && yarn cache clean --all && yarn && git add yarn.lock",
-    "analyze": "ANALYZE=true env-cmd -f .env.prod next build"
+    "analyze": "ANALYZE=true env-cmd --silent -f .env.prod next build"
   },
   "dependencies": {
     "@ant-design/v5-patch-for-react-19": "^1.0.3",

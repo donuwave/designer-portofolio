@@ -1,9 +1,22 @@
 import { withSentryConfig } from '@sentry/nextjs';
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const withBaseUrl = (baseUrl, routePath) => {
+  if (!baseUrl) {
+    return null;
+  }
+
+  return `${baseUrl.replace(/\/$/, '')}${routePath}`;
+};
 
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  outputFileTracingRoot: __dirname,
   compiler: {
     styledComponents: true
   },
@@ -64,21 +77,21 @@ const nextConfig = {
     return [
       {
         source: '/auth/web/:path*',
-        destination: `${process.env.BASE_APP_URL}/auth/web/:path*`
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/auth/web/:path*')
       },
       {
         source: '/mock/:path*',
-        destination: `${process.env.BASE_MOCK_URL}/mock/:path*`
+        destination: withBaseUrl(process.env.BASE_MOCK_URL, '/mock/:path*')
       },
       {
         source: '/web/:path*',
-        destination: `${process.env.BASE_APP_URL}/web/:path*`
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/web/:path*')
       },
       {
         source: '/api/:path*',
-        destination: `${process.env.BASE_APP_URL}/api/:path*`
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/api/:path*')
       }
-    ];
+    ].filter(({ destination }) => Boolean(destination));
   }
 };
 
