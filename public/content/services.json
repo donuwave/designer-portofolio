@@ -270,7 +270,7 @@
     {
       "id": "service-3",
       "title": "Iteco Customer",
-      "description": "Iteco Customer",
+      "description": "Iteco Customer. Сервис для потенциального заказчика.",
       "coverImage": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
       "caseStudy": {
         "blocks": [
@@ -287,6 +287,38 @@
                   "Придумал дизайе",
                   "Придумал дизайе1"
                 ]
+              }
+            ]
+          },
+          {
+            "type": "text-card",
+            "title": "Дизайн",
+            "paragraphs": [],
+            "bullets": [
+              {
+                "text": "Я участвовал:",
+                "list": [
+                  "Разработке дизайна",
+                  "Разработке ui-kit"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "media-cluster",
+            "layout": "feature-left",
+            "items": [
+              {
+                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
+                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
+              },
+              {
+                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
+                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
+              },
+              {
+                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
+                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
               }
             ]
           },

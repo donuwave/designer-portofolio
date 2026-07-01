@@ -1,7 +1,8 @@
-import { withSentryConfig } from '@sentry/nextjs';
-import withBundleAnalyzer from '@next/bundle-analyzer';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { withSentryConfig } from '@sentry/nextjs';
+import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -18,10 +19,9 @@ const nextConfig = {
   output: 'standalone',
   outputFileTracingRoot: __dirname,
   compiler: {
-    styledComponents: true
+    styledComponents: true,
   },
   productionBrowserSourceMaps: false,
-  eslint: { ignoreDuringBuilds: true },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.alias['msw/node'] = false;
@@ -35,9 +35,9 @@ const nextConfig = {
       'react-virtuoso',
       '@mdxeditor/editor',
       '@virtuoso.dev/message-list',
-      "dayjs",
-      "lodash.debounce",
-    ]
+      'dayjs',
+      'lodash.debounce',
+    ],
   },
   env: {
     BASE_API_URL: process.env.BASE_API_URL,
@@ -50,7 +50,7 @@ const nextConfig = {
     FEATURED_NAME: process.env.FEATURED_NAME,
     FIREBASE_VAPID_KEY: process.env.FIREBASE_VAPID_KEY,
     SENTRY_DSN: process.env.SENTRY_DSN,
-    SENTRY_ENABLE: process.env.SENTRY_ENABLE
+    SENTRY_ENABLE: process.env.SENTRY_ENABLE,
   },
   transpilePackages: [
     'rc-util',
@@ -61,7 +61,7 @@ const nextConfig = {
     'leva',
     'antd',
     'rc-pagination',
-    'rc-picker'
+    'rc-picker',
   ],
   images: {
     remotePatterns: [
@@ -69,40 +69,37 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**',
         port: '',
-        pathname: '**'
-      }
-    ]
+        pathname: '**',
+      },
+    ],
   },
   async rewrites() {
     return [
       {
         source: '/auth/web/:path*',
-        destination: withBaseUrl(process.env.BASE_APP_URL, '/auth/web/:path*')
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/auth/web/:path*'),
       },
       {
         source: '/mock/:path*',
-        destination: withBaseUrl(process.env.BASE_MOCK_URL, '/mock/:path*')
+        destination: withBaseUrl(process.env.BASE_MOCK_URL, '/mock/:path*'),
       },
       {
         source: '/web/:path*',
-        destination: withBaseUrl(process.env.BASE_APP_URL, '/web/:path*')
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/web/:path*'),
       },
       {
         source: '/api/:path*',
-        destination: withBaseUrl(process.env.BASE_APP_URL, '/api/:path*')
-      }
+        destination: withBaseUrl(process.env.BASE_APP_URL, '/api/:path*'),
+      },
     ].filter(({ destination }) => Boolean(destination));
-  }
+  },
 };
 
 const bundleAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true'
+  enabled: process.env.ANALYZE === 'true',
 });
 
-export default withSentryConfig(
-  bundleAnalyzer(nextConfig),
-  {
-    telemetry: false,
-    sourcemaps: { deleteSourcemapsAfterUpload: true }
-  }
-);
+export default withSentryConfig(bundleAnalyzer(nextConfig), {
+  telemetry: false,
+  sourcemaps: { deleteSourcemapsAfterUpload: true },
+});

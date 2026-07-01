@@ -11,7 +11,7 @@ const httpRequestCounter = new Counter({
   registers: [register],
 });
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/api/admin');
   const isAdminLoginRoute = pathname === '/admin/login' || pathname === '/api/admin/login';
@@ -76,7 +76,3 @@ export async function middleware(request: NextRequest) {
 
   return response;
 }
-
-export const config = {
-  runtime: 'nodejs',
-};

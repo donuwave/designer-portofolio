@@ -12,7 +12,7 @@ export default async function SelectionLayout({ children }: PropsWithChildren) {
       <PixelBlast
         variant="square"
         pixelSize={3}
-        color="#B497CF"
+        color="white"
         patternScale={6}
         patternDensity={1}
         pixelSizeJitter={0}
