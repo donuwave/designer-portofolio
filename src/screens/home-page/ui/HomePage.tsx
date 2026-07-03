@@ -23,7 +23,7 @@ export const HomePage = async () => {
 
       <ServicesList items={services} />
 
-      <SButton size="large">
+      <SButton href="https://t.me/Artyom_Kartsev" size="large">
         <ButtonHoverSvg className="hover-svg" />
         Написать мне
       </SButton>
