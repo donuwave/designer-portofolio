@@ -768,13 +768,16 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
   ]);
 
   return (
-    <SContainer>
-      <SPixelBlast
-        ref={containerRef}
-        className={`pixel-blast-container ${className ?? ''}`}
-        style={style}
-        aria-label="PixelBlast interactive background"
-      />
+    <>
+      <SContainer>
+        <SPixelBlast
+          ref={containerRef}
+          className={`pixel-blast-container ${className ?? ''}`}
+          style={style}
+          aria-label="PixelBlast interactive background"
+        />
+      </SContainer>
+
       <SViewportDots aria-hidden="true">
         {VIEWPORT_DOTS.map((dot) => (
           <SViewportDot
@@ -787,6 +790,6 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
           />
         ))}
       </SViewportDots>
-    </SContainer>
+    </>
   );
 };

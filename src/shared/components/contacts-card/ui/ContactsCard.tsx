@@ -1,19 +1,8 @@
 import React, { FC } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
-import { MyContacts } from '@/shared/assets';
+import { FooterInformation, FooterTop } from '@/shared/assets';
 
-import {
-  SContactsCard,
-  SFooter,
-  SIconBadge,
-  SLabel,
-  SRow,
-  SRows,
-  SUpdatedText,
-  SValue,
-} from './contactsCard.styles';
+import { SContact, SContactItem, SContainer, SLink } from './contactsCard.styles';
 
 export interface IContactsCardItem {
   label: string;
@@ -26,37 +15,62 @@ interface IContactsCard {
   updatedText: string;
 }
 
-export const ContactsCard: FC<IContactsCard> = ({ items, updatedText }) => {
+export const ContactsCard: FC<IContactsCard> = ({ items }) => {
   return (
-    <SContactsCard>
-      <MyContacts />
+    <SContainer>
+      <FooterTop />
+      <FooterInformation />
+      <SContact>
+        {items.map((el, i) => (
+          <>
+            <svg
+              width="390"
+              height="2"
+              viewBox="0 0 390 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="1"
+                y1="1"
+                x2="389"
+                y2="0.999966"
+                stroke="#7C7C7C"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-dasharray="10 10"
+              />
+            </svg>
 
-      <SRows>
-        {items.map((item) => {
-          const isExternalLink = item.href.startsWith('http');
+            <SContactItem key={el.href}>
+              <span>{el.label}</span>
+              <SLink href={el.href}>{el.value}</SLink>
+            </SContactItem>
 
-          return (
-            <SRow key={`${item.label}-${item.value}`}>
-              <SLabel>{item.label}</SLabel>
-              <SValue
-                href={item.href}
-                target={isExternalLink ? '_blank' : undefined}
-                rel={isExternalLink ? 'noreferrer' : undefined}
+            {i === 2 && (
+              <svg
+                width="390"
+                height="2"
+                viewBox="0 0 390 2"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                {item.value}
-              </SValue>
-            </SRow>
-          );
-        })}
-      </SRows>
-
-      <SFooter>
-        <SUpdatedText>{updatedText}</SUpdatedText>
-
-        <SIconBadge aria-hidden="true">
-          <FontAwesomeIcon icon={faGlobe} />
-        </SIconBadge>
-      </SFooter>
-    </SContactsCard>
+                <line
+                  x1="1"
+                  y1="1"
+                  x2="389"
+                  y2="0.999966"
+                  stroke="#7C7C7C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-dasharray="10 10"
+                />
+              </svg>
+            )}
+          </>
+        ))}
+      </SContact>
+      <span style={{ color: 'rgba(124, 124, 124, 1)' }}>*Meta запрещена в России</span>
+    </SContainer>
   );
 };

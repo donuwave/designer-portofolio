@@ -3,10 +3,12 @@
   "version": "1.4.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd --silent -f .env.dev.local next dev -p 8080",
+    "dev": "env-cmd --silent -f .env.dev.local next dev -p 8080 --webpack",
+    "build": "next build",
     "build:dev": "env-cmd --silent -f .env.dev next build --webpack",
     "build:prod": "env-cmd --silent -f .env.prod next build --webpack",
     "start": "next start -p 8080",
+    "start:next": "next start -p 8080",
     "test": "jest",
     "lint": "cross-env NODE_ENV=production eslint . --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc",
@@ -93,5 +95,5 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.9.2"
 }

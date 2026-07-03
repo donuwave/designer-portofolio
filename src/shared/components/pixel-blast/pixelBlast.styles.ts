@@ -1,23 +1,26 @@
 import styled from 'styled-components';
 
 export const SPixelBlast = styled.div`
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  position: relative;
-  overflow: hidden;
 `;
 
 export const SContainer = styled.div`
-  width: 100%;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
   height: 100dvh;
-  position: absolute;
+  overflow: hidden;
+  z-index: 0;
 `;
 
 export const SViewportDots = styled.div`
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 20;
+  z-index: 10000;
 `;
 
 type ViewportDotProps = {
@@ -38,7 +41,6 @@ export const SViewportDot = styled.span<ViewportDotProps>`
   left: ${({ $left }) => $left ?? 'auto'};
   transform: ${({ $translate }) => $translate ?? 'none'};
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.18) inset,
     0 0 18px rgba(255, 255, 255, 0.12);

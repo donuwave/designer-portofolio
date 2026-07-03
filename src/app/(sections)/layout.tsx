@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react';
 import { PixelBlast } from '@/shared/components';
 
 import { SContainer, SLayout } from './layout.styles';
+import { Header } from '@/widgets/header';
 
 export default async function SelectionLayout({ children }: PropsWithChildren) {
   return (
@@ -28,6 +29,8 @@ export default async function SelectionLayout({ children }: PropsWithChildren) {
         edgeFade={0.25}
         transparent
       />
+
+      <Header />
 
       <SContainer>{children}</SContainer>
     </SLayout>

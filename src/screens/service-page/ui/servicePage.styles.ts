@@ -82,6 +82,8 @@ type MediaClusterProps = {
 
 export const SMediaCluster = styled.section<MediaClusterProps>`
   position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: ${({ $layout }) =>
     $layout === 'feature-left'

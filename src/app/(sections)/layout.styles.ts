@@ -5,9 +5,9 @@ export const SLayout = styled.div`
   min-height: 100dvh;
   color: white;
   background: #050505;
+  padding-top: 42px;
 `;
 
 export const SContainer = styled.div`
-  max-width: 1100px;
   margin: 0 auto;
 `;

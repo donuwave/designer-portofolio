@@ -18,6 +18,8 @@ export const STitle = styled.h2`
   font-weight: 700;
   color: #191919;
   white-space: pre-line;
+  line-height: 1.2;
+  letter-spacing: -4%;
 `;
 
 export const SText = styled.p`

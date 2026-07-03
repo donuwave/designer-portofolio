@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { withSentryConfig } from '@sentry/nextjs';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -99,7 +98,4 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default withSentryConfig(bundleAnalyzer(nextConfig), {
-  telemetry: false,
-  sourcemaps: { deleteSourcemapsAfterUpload: true },
-});
+export default bundleAnalyzer(nextConfig);

@@ -20,12 +20,13 @@ import {
   SCaseStudyCardTitle,
   SCaseStudyFlow,
   SCtaWrap,
-  SContactsWrap,
   SMediaCard,
   SMediaCluster,
   SMediaImage,
   SServicePage,
 } from './servicePage.styles';
+import { SButton } from '@/screens/home-page/ui/home.styles';
+import { ButtonHoverSvg } from '@/shared/assets';
 
 interface IServiceContacts {
   items: {
@@ -120,7 +121,10 @@ export const ServicePage: FC<IServicePage> = ({ service, contacts }) => {
         {service.caseStudy?.blocks.map(renderCaseStudyBlock)}
       </SCaseStudyFlow>
 
-      <Button size="large">Написать мне</Button>
+      <SButton size="large">
+        <ButtonHoverSvg className="hover-svg" />
+        Написать мне
+      </SButton>
 
       <ContactsCard items={contacts.items} updatedText={contacts.updatedText} />
     </SServicePage>

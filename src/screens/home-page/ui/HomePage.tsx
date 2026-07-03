@@ -1,14 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import { Button } from 'antd';
 
 import { ContactsCard, ItemCard, WorksCard } from '@/shared/components';
 import { getServices } from '@/shared/lib/content/services';
 import { ServicesList } from '@/widgets/services-list';
-import { mainImage } from '@/shared/assets';
 
 import { getHomeInformation } from '../lib/home-information';
-import { SAvatar, SHome } from './home.styles';
+import { SAvatar, SButton, SHome } from './home.styles';
+import { avatar, ButtonHoverSvg } from '@/shared/assets';
 
 export const HomePage = async () => {
   const [homeInformation, services] = await Promise.all([getHomeInformation(), getServices()]);
@@ -16,7 +15,7 @@ export const HomePage = async () => {
   return (
     <SHome>
       <SAvatar>
-        <Image priority width={175} height={175} alt="Основное изображение" src={mainImage.src} />
+        <Image priority width={175} height={175} alt="Основное изображение" src={avatar.src} />
       </SAvatar>
 
       <ItemCard text={homeInformation.greeting.text} title={homeInformation.greeting.title} />
@@ -24,7 +23,10 @@ export const HomePage = async () => {
 
       <ServicesList items={services} />
 
-      <Button size="large">Написать мне</Button>
+      <SButton size="large">
+        <ButtonHoverSvg className="hover-svg" />
+        Написать мне
+      </SButton>
 
       <ContactsCard
         items={homeInformation.contacts.items}

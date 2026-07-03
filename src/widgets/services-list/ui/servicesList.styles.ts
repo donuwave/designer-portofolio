@@ -3,73 +3,62 @@ import styled from 'styled-components';
 
 export const SContainer = styled.div`
   display: grid;
-  justify-items: center;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 100px;
+  gap: 32px;
   padding: 100px 0;
-  perspective: 1400px;
+  max-width: 1108px;
+  margin: 0 auto;
 `;
 
-interface SItemProps {
-  $rotateY: number;
-}
+export const SItem = styled(Link)`
+  display: grid;
+  grid-template-rows: 213px 70px;
+  gap: 6px;
+  justify-items: center;
+  align-content: space-between;
+  padding-top: 32px;
+  padding-bottom: 32px;
 
-export const SItem = styled(Link)<SItemProps>`
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 250px;
   border-radius: 28px;
   overflow: hidden;
   position: relative;
-  display: block;
   box-shadow:
-    0 16px 30px rgba(0, 0, 0, 0.24),
-    0 4px 10px rgba(0, 0, 0, 0.14);
+    0 0 64px -2.88px rgba(88, 88, 88, 1) inset,
+    0 0 48px -0.77px rgba(50, 50, 50, 1) inset,
+    0 0 32px -0.58px rgba(52, 52, 52, 1) inset,
+    0 0 24px -0.19px rgba(188, 188, 188, 1) inset;
+  z-index: 1000;
   background: #111;
   color: #ffffff;
   text-decoration: none;
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  transform: rotateY(${({ $rotateY }) => $rotateY}deg);
-
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-
-  &:hover {
-    transform: rotateY(${({ $rotateY }) => $rotateY * 0.55}deg) translateY(-8px) scale(1.03);
-    box-shadow:
-      0 22px 40px rgba(0, 0, 0, 0.28),
-      0 8px 16px rgba(0, 0, 0, 0.16);
-    z-index: 10;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: auto 0 0;
-    height: 48%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.78) 100%);
-    pointer-events: none;
-  }
-
-  & span {
-    position: absolute;
-    left: 18px;
-    right: 18px;
-    bottom: 16px;
-    z-index: 1;
-    font-size: 20px;
-    line-height: 1;
-    font-weight: 700;
-  }
 `;
 
 export const SImage = styled.img`
-  width: 100%;
+  width: 213px;
+  height: 213px;
+`;
+
+export const SText = styled.div`
+  justify-self: left;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 0 32px;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  backface-visibility: hidden;
+`;
+
+export const STitle = styled.p`
+  font-size: 16px;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  letter-spacing: -4%;
+`;
+
+export const SDescription = styled.p`
+  color: rgba(124, 124, 124, 1);
+  font-size: 14px;
+  line-height: 140%;
 `;

@@ -2,32 +2,28 @@ import React from 'react';
 
 import { IService } from '@/shared/lib/content/services';
 
-import { SContainer, SImage, SItem } from './servicesList.styles';
+import { SContainer, SDescription, SImage, SItem, SText, STitle } from './servicesList.styles';
+import { Magnet } from '@/shared/components/magnet';
 
 interface IServicesList {
   items: IService[];
 }
 
-const columns = 3;
-const getCardTilt = (index: number) => {
-  const column = index % columns;
-
-  if (column === 0) return 12;
-  if (column === columns - 1) return -12;
-  return 0;
-};
-
 export const ServicesList = ({ items }: IServicesList) => {
   return (
     <SContainer>
-      {items.map((service, index) => {
-        const tilt = getCardTilt(index);
-
+      {items.map((service) => {
         return (
-          <SItem key={service.id} href={`/service/${service.id}`} $rotateY={tilt}>
-            <SImage src={service.coverImage} alt={service.title} />
-            <span>{service.title}</span>
-          </SItem>
+          <Magnet padding={10} disabled={false} magnetStrength={10}>
+            <SItem key={service.id} href={`/service/${service.id}`}>
+              <SImage src={service.coverImage} alt={service.title} />
+
+              <SText>
+                <STitle>{service.title}</STitle>
+                <SDescription>{service.description}</SDescription>
+              </SText>
+            </SItem>
+          </Magnet>
         );
       })}
     </SContainer>

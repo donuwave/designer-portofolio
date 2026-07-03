@@ -10,12 +10,19 @@ import {
   SList,
   SText,
   STitle,
+  STitlePrice,
+  STools,
+  SToolsContainer,
   SWork,
   SWorkItem,
   SWorks,
 } from './worksCard.styles';
+import { ToolsCard } from '@/shared/components';
+import { getTools } from '../lib/get-tools';
 
 export const WorksCard = () => {
+  const tools = getTools();
+
   return (
     <SWorks>
       <SText>Места работы</SText>
@@ -43,16 +50,26 @@ export const WorksCard = () => {
       <SText>Опыт в цифрах</SText>
 
       <SInfoText>
-        <STitle>900 000 000 ₽</STitle>
+        <STitlePrice>900 000 000 ₽</STitlePrice>
         <SInfo>Стоимость проекта, в котором я принимал участие</SInfo>
       </SInfoText>
 
       <SBr />
 
       <SInfoText>
-        <STitle>88,8% Adoption Rate</STitle>
+        <STitlePrice>88,8% Adoption Rate</STitlePrice>
         <SInfo>Результат внедрения геймификации в корпоративное приложение для сотрудников</SInfo>
       </SInfoText>
+
+      <STools>
+        <SText>Используемые инструменты</SText>
+
+        <SToolsContainer>
+          {tools.map((el) => (
+            <ToolsCard key={el.id} title={el.title} icons={el.icons} />
+          ))}
+        </SToolsContainer>
+      </STools>
     </SWorks>
   );
 };

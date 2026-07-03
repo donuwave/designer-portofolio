@@ -40,16 +40,24 @@ export const SList = styled.div`
 export const STitle = styled.h2`
   font-size: 16px;
   font-weight: 700;
-  color: #191919;
+  color: rgba(25, 25, 25, 1);
+`;
+
+export const STitlePrice = styled.h2`
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(25, 25, 25, 1);
 `;
 
 export const SInfo = styled.span`
-  color: #7c7c7c;
+  color: rgba(124, 124, 124, 1);
   font-weight: 700;
   font-size: 16px;
 `;
 
 export const SInfoText = styled.div`
+  display: grid;
+  gap: 6px;
   padding: 16px 0;
 `;
 
@@ -57,4 +65,16 @@ export const SBr = styled.div`
   width: 100%;
   height: 1px;
   background: #e9e9e9;
+`;
+
+export const STools = styled.div`
+  padding-top: 16px;
+  display: grid;
+  gap: 16px;
+`;
+
+export const SToolsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 `;
