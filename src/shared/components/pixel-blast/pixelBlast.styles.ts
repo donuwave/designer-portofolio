@@ -21,6 +21,10 @@ export const SViewportDots = styled.div`
   inset: 0;
   pointer-events: none;
   z-index: 10000;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 `;
 
 type ViewportDotProps = {
