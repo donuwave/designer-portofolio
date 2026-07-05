@@ -7,7 +7,7 @@ export const SItemCard = styled.div`
   padding: 32px;
   border-radius: 48px;
   background: #ffffff;
-  min-width: 390px;
+  //min-width: 390px;
   max-width: 390px;
   z-index: 1;
   justify-self: center;

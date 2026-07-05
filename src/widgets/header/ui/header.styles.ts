@@ -1,21 +1,33 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
+export const SWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  padding: 0 16px;
+
+  @media (max-width: 425px) {
+    justify-content: normal;
+  }
+`;
+
 export const SHeader = styled.header`
   box-shadow: 0 0 54px -0.19px #bcbcbc inset;
   background: rgba(14, 14, 14, 1);
+  max-width: 390px;
   width: 390px;
   height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 32px;
-  margin: 0 auto;
   border-radius: 28px;
   z-index: 10;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+
+  @media (max-width: 425px) {
+    width: 100% !important;
+  }
 `;
 
 export const SLink = styled(Link)`

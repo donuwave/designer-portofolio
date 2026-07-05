@@ -3,7 +3,7 @@ import { Button } from 'antd';
 
 export const SHome = styled.div`
   display: grid;
-  padding: 140px 16px 0 16px;
+  padding: 48px 16px 0 16px;
 `;
 
 export const SAvatar = styled.div`
@@ -74,5 +74,11 @@ export const SButton = styled(Button)`
 
   &.ant-btn:active {
     transform: none !important;
+  }
+
+  @media (max-width: 1100px) {
+    .hover-svg {
+      display: none !important;
+    }
   }
 `;

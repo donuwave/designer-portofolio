@@ -9,6 +9,14 @@ export const SContainer = styled.div`
   padding: 100px 0;
   max-width: 1108px;
   margin: 0 auto;
+
+  @media (max-width: 1080px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const SItem = styled(Link)`

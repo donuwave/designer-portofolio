@@ -17,6 +17,7 @@ html {
 
 body {
   font-family: var(--font-jet_brains_Mono);
+  background: rgba(5, 5, 5, 1);
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;

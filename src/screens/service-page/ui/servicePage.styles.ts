@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SServicePage = styled.div`
   display: grid;
   gap: 48px;
-  padding: 120px 0 0;
+  padding: 48px 16px 16px;
 `;
 
 export const SCaseStudyFlow = styled.div`
@@ -92,6 +92,15 @@ export const SMediaCluster = styled.section<MediaClusterProps>`
   grid-template-rows: repeat(2, minmax(170px, 1fr));
   gap: 24px;
   z-index: 1;
+
+  @media (max-width: 990px) {
+    grid-template-columns: 390px;
+    grid-template-rows: auto;
+  }
+
+  @media (max-width: 425px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 type MediaCardProps = {
@@ -109,6 +118,7 @@ export const SMediaCard = styled.div<MediaCardProps>`
   box-shadow:
     0 28px 56px rgba(0, 0, 0, 0.24),
     0 10px 18px rgba(0, 0, 0, 0.12);
+
   grid-row: ${({ $size }) => ($size === 'large' ? '1 / span 2' : 'auto')};
   grid-column: ${({ $size, $layout }) => {
     if ($size === 'small' && $layout === 'feature-left') return '2';
@@ -116,6 +126,12 @@ export const SMediaCard = styled.div<MediaCardProps>`
     if ($layout === 'feature-left') return '1';
     return '2';
   }};
+
+  @media (max-width: 990px) {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 260px; /* или оставить разные высоты, если хочешь */
+  }
 `;
 
 export const SMediaImage = styled.img`

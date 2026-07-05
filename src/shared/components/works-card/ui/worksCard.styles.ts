@@ -5,7 +5,6 @@ export const SWorks = styled.div`
   padding: 32px;
   z-index: 1;
   border-radius: 48px;
-  min-width: 390px;
   max-width: 390px;
   margin-top: 24px;
   justify-self: center;
@@ -47,6 +46,7 @@ export const STitlePrice = styled.h2`
   font-size: 20px;
   font-weight: 700;
   color: rgba(25, 25, 25, 1);
+  font-style: Regular;
 `;
 
 export const SInfo = styled.span`
