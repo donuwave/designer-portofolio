@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import path from 'node:path';
 
 import { unstable_noStore as noStore } from 'next/cache';
+import { ensureServicesContentFile } from '@/shared/lib/storage';
 
 export interface IServiceTextCardBlock {
   type: 'text-card';
@@ -44,16 +44,16 @@ export interface IServiceCaseStudy {
 export interface IService {
   id: string;
   title: string;
+  listDescription: string;
   description: string;
   coverImage: string;
+  href?: string;
   caseStudy?: IServiceCaseStudy;
 }
 
 export interface IServicesContent {
   services: IService[];
 }
-
-const servicesContentPath = path.join(process.cwd(), 'public', 'content', 'services.json');
 
 const isServiceMediaItem = (value: unknown): value is IServiceMediaItem => {
   if (!value || typeof value !== 'object') return false;
@@ -122,10 +122,22 @@ const isService = (value: unknown): value is IService => {
   return (
     typeof service.id === 'string' &&
     typeof service.title === 'string' &&
-    typeof service.description === 'string' &&
+    typeof service.listDescription === 'string' &&
+    (service.description === undefined || typeof service.description === 'string') &&
     typeof service.coverImage === 'string' &&
+    (service.href === undefined || typeof service.href === 'string') &&
     caseStudyValid
   );
+};
+
+const isHttpsUrl = (value: string) => {
+  try {
+    const url = new URL(value);
+
+    return url.protocol === 'https:';
+  } catch {
+    return false;
+  }
 };
 
 const isServicesContent = (value: unknown): value is IServicesContent => {
@@ -145,6 +157,7 @@ const validateServicesContent = (value: unknown): IServicesContent => {
 
   value.services.forEach((service, index) => {
     const normalizedId = service.id.trim();
+    const normalizedHref = service.href?.trim();
 
     if (!normalizedId) {
       throw new Error(`Service at index ${index} must have a non-empty id`);
@@ -155,6 +168,19 @@ const validateServicesContent = (value: unknown): IServicesContent => {
     }
 
     usedIds.add(normalizedId);
+    service.description = service.description?.trim() ?? '';
+
+    if (normalizedHref) {
+      if (!isHttpsUrl(normalizedHref)) {
+        throw new Error(
+          `Service "${normalizedId}" must use an https URL in href to link to another domain`
+        );
+      }
+
+      service.href = normalizedHref;
+    } else if (service.href !== undefined) {
+      delete service.href;
+    }
   });
 
   return value;
@@ -163,6 +189,7 @@ const validateServicesContent = (value: unknown): IServicesContent => {
 const readServicesContent = async (): Promise<IServicesContent> => {
   noStore();
 
+  const servicesContentPath = await ensureServicesContentFile();
   const fileContent = await readFile(servicesContentPath, 'utf8');
   const parsedContent: unknown = JSON.parse(fileContent);
 
@@ -173,6 +200,7 @@ export const getServicesContent = async (): Promise<IServicesContent> => readSer
 
 export const saveServicesContent = async (value: unknown): Promise<IServicesContent> => {
   const content = validateServicesContent(value);
+  const servicesContentPath = await ensureServicesContentFile();
 
   await writeFile(servicesContentPath, `${JSON.stringify(content, null, 2)}\n`, 'utf8');
 

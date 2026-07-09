@@ -3,8 +3,9 @@
     {
       "id": "iteco-driver",
       "title": "ITECO.Водитель",
+      "listDescription": "ITECO.Водитель — мобильное приложение для водителей ИТЕКО",
       "description": "ITECO.Водитель — мобильное приложение для водителей ИТЕКО",
-      "coverImage": "../presents.png",
+      "coverImage": "",
       "caseStudy": {
         "blocks": [
           {
@@ -69,24 +70,6 @@
             ]
           },
           {
-            "type": "media-cluster",
-            "layout": "feature-left",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Экран приложения ITECO.Водитель"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Детали интерфейса ITECO.Водитель"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Вид карточки сценария ITECO.Водитель"
-              }
-            ]
-          },
-          {
             "type": "text-card",
             "title": "Решение",
             "paragraphs": [
@@ -144,24 +127,6 @@
             "paragraphs": [
               "Функциональность стала первым шагом к полной цифровизации процессов с участием водителей. Теперь каждое действие подтверждается, каждое расхождение фиксируется, а водитель становится полноценным участником процесса, а не объектом контроля."
             ]
-          },
-          {
-            "type": "media-cluster",
-            "layout": "feature-right",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Главный экран кейса ITECO.Водитель"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Дополнительный экран кейса ITECO.Водитель"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "Детальный экран кейса ITECO.Водитель"
-              }
-            ]
           }
         ]
       }
@@ -169,8 +134,9 @@
     {
       "id": "service-2",
       "title": "ITECO.Сотрудник",
+      "listDescription": "Поздравительные открытки",
       "description": "Поздравительные открытки",
-      "coverImage": "../presents.png",
+      "coverImage": "",
       "caseStudy": {
         "blocks": [
           {
@@ -212,24 +178,6 @@
             "bullets": []
           },
           {
-            "type": "media-cluster",
-            "layout": "feature-left",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              }
-            ]
-          },
-          {
             "type": "text-card",
             "title": "Решение",
             "paragraphs": [
@@ -245,24 +193,6 @@
               "В приложение добавился не только рабочий, но и вовлекающий сценарий. Поздравительные открытки помогают сотрудникам взаимодействовать друг с другом внутри продукта, создают дополнительный повод вернуться в приложение и усиливают ощущение корпоративной среды."
             ],
             "bullets": []
-          },
-          {
-            "type": "media-cluster",
-            "layout": "feature-left",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              }
-            ]
           }
         ]
       }
@@ -270,8 +200,9 @@
     {
       "id": "service-3",
       "title": "ITECO. Заказчик ",
+      "listDescription": "Iteco Customer. Сервис для потенциального заказчика.",
       "description": "Iteco Customer. Сервис для потенциального заказчика.",
-      "coverImage": "../presents.png",
+      "coverImage": "/uploads/services/presents.png",
       "caseStudy": {
         "blocks": [
           {
@@ -303,44 +234,19 @@
                 ]
               }
             ]
-          },
-          {
-            "type": "media-cluster",
-            "layout": "feature-left",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              }
-            ]
-          },
-          {
-            "type": "media-cluster",
-            "layout": "feature-left",
-            "items": [
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              },
-              {
-                "src": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg",
-                "alt": "https://i.pinimg.com/736x/c2/75/02/c275028eeb373c761a474f8681db628f.jpg"
-              }
-            ]
           }
         ]
+      }
+    },
+    {
+      "id": "service-4",
+      "title": "Новый сервис",
+      "listDescription": "",
+      "description": "",
+      "coverImage": "",
+      "href": "https://technology.iteco.com/",
+      "caseStudy": {
+        "blocks": []
       }
     }
   ]

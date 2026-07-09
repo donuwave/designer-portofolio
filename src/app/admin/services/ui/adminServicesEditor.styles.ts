@@ -59,6 +59,7 @@ export const SSidebar = styled.aside`
 export const SPanel = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 300px;
   gap: 16px;
   padding: 20px;
@@ -86,6 +87,95 @@ export const SPanelTitle = styled.h2`
 export const SServiceList = styled.div`
   display: grid;
   gap: 8px;
+`;
+
+export const SHiddenFileInput = styled.input`
+  display: none;
+`;
+
+export const SMediaSummary = styled.div`
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #edf0f4;
+  border-radius: 10px;
+  background: #fafbfc;
+`;
+
+export const SMediaSummaryRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #48505d;
+  font-size: 12px;
+  line-height: 1.4;
+`;
+
+export const SMediaList = styled.div`
+  display: grid;
+  gap: 10px;
+`;
+
+export const SMediaItem = styled.div`
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px;
+  border: 1px solid #edf0f4;
+  border-radius: 10px;
+  background: #fafbfc;
+`;
+
+export const SMediaPreview = styled.img`
+  width: 56px;
+  height: 56px;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #e8ebf0;
+`;
+
+export const SMediaMeta = styled.div`
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+`;
+
+export const SMediaName = styled.p`
+  margin: 0;
+  color: #191919;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 700;
+  word-break: break-word;
+`;
+
+export const SMediaDetails = styled.p`
+  margin: 0;
+  color: #66707d;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-word;
+`;
+
+export const SMediaUsage = styled.p`
+  margin: 0;
+  color: #8b6270;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-word;
+`;
+
+export const SSelectPreview = styled.img`
+  width: 100%;
+  max-width: 200px;
+  display: block;
+  border: 1px solid #edf0f4;
+  border-radius: 12px;
+  background: #f2f4f7;
+  object-fit: cover;
 `;
 
 export const SEditor = styled.div`

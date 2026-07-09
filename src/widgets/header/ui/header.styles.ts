@@ -7,6 +7,10 @@ const iconWidth = `calc(24px * ${layout.compactScale})`;
 const iconHeight = `calc(22px * ${layout.compactScale})`;
 
 export const SWrapper = styled.div`
+  position: fixed;
+  top: ${layout.headerTopOffset};
+  left: 0;
+  z-index: 50;
   width: 100%;
   display: grid;
   justify-content: center;

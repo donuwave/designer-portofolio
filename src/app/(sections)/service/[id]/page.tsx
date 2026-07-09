@@ -23,7 +23,7 @@ export const generateMetadata = async ({ params }: IServiceRoutePageProps): Prom
 
   return {
     title: service.title,
-    description: service.description,
+    description: service.description || service.listDescription,
   };
 };
 

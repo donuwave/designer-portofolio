@@ -14,15 +14,22 @@ export const ServicesList = ({ items }: IServicesList) => {
   return (
     <SContainer>
       {items.map((service) => {
+        const serviceHref = service.href?.trim() || `/service/${service.id}`;
+        const isExternal = serviceHref.startsWith('https://');
+
         return (
-          <Magnet padding={10} disabled={false} magnetStrength={10}>
-            <Link key={service.id} href={`/service/${service.id}`}>
+          <Magnet key={service.id} padding={10} disabled={false} magnetStrength={10}>
+            <Link
+              href={serviceHref}
+              rel={isExternal ? 'noreferrer' : undefined}
+              target={isExternal ? '_blank' : undefined}
+            >
               <SItem cornerRadius={64} cornerSmoothing={1}>
                 <SImage src={service.coverImage} alt={service.title} />
 
                 <SText>
                   <STitle>{service.title}</STitle>
-                  <SDescription>{service.description}</SDescription>
+                  <SDescription>{service.listDescription}</SDescription>
                 </SText>
               </SItem>
             </Link>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Alert, Button, Input, Select } from 'antd';
 
 import type {
@@ -13,6 +13,7 @@ import type {
   IServiceTextCardBlock,
   IServiceTextCardBulletGroup,
 } from '@/shared/lib/content/services';
+import type { IMediaLibrary } from '@/shared/lib/media-library';
 
 import {
   SArrayStack,
@@ -26,17 +27,27 @@ import {
   SFieldLabel,
   SHeader,
   SHeaderActions,
+  SHiddenFileInput,
   SInlineActions,
   SLayout,
+  SMediaDetails,
+  SMediaItem,
+  SMediaList,
+  SMediaMeta,
+  SMediaName,
+  SMediaPreview,
+  SMediaSummary,
+  SMediaSummaryRow,
+  SMediaUsage,
   SMuted,
   SPage,
   SPanel,
   SPanelHeader,
   SPanelTitle,
+  SSelectPreview,
   SSection,
   SSectionHeader,
   SSectionTitle,
-  SServiceList,
   SSidebar,
   SSplitFields,
   SSubsection,
@@ -52,6 +63,30 @@ const { TextArea } = Input;
 type NoticeState = {
   type: 'success' | 'error';
   message: string;
+};
+
+const formatBytes = (value: number) => {
+  if (value < 1024) return `${value} B`;
+  if (value < 1024 * 1024) return `${(value / 1024).toFixed(1)} KB`;
+
+  return `${(value / (1024 * 1024)).toFixed(2)} MB`;
+};
+
+const buildMediaOptions = (paths: string[], mediaLibrary: IMediaLibrary) => {
+  const uniquePaths = Array.from(new Set(paths.filter(Boolean)));
+  const knownOptions = mediaLibrary.items.map((item) => ({
+    label: item.name,
+    value: item.path,
+  }));
+  const knownPaths = new Set(knownOptions.map((item) => item.value));
+  const customOptions = uniquePaths
+    .filter((item) => !knownPaths.has(item))
+    .map((item) => ({
+      label: item,
+      value: item,
+    }));
+
+  return [...knownOptions, ...customOptions];
 };
 
 const moveItem = <T,>(items: T[], index: number, direction: -1 | 1) => {
@@ -117,8 +152,10 @@ const createServiceId = (services: IService[]) => {
 const createService = (services: IService[]): IService => ({
   id: createServiceId(services),
   title: 'Новый сервис',
+  listDescription: '',
   description: '',
   coverImage: '',
+  href: '',
   caseStudy: {
     blocks: [],
   },
@@ -126,19 +163,29 @@ const createService = (services: IService[]): IService => ({
 
 interface IAdminServicesEditorProps {
   initialContent: IServicesContent;
+  initialMediaLibrary: IMediaLibrary;
 }
 
-export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProps) => {
+export const AdminServicesEditor = ({
+  initialContent,
+  initialMediaLibrary,
+}: IAdminServicesEditorProps) => {
   const [content, setContent] = useState(initialContent);
+  const [mediaLibrary, setMediaLibrary] = useState(initialMediaLibrary);
   const [selectedServiceId, setSelectedServiceId] = useState(initialContent.services[0]?.id ?? '');
   const [notice, setNotice] = useState<NoticeState | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isUploadingMedia, setIsUploadingMedia] = useState(false);
+  const [deletingMediaPath, setDeletingMediaPath] = useState<string | null>(null);
+  const mediaInputRef = useRef<HTMLInputElement | null>(null);
 
   const selectedServiceIndex = content.services.findIndex(
     (service) => service.id === selectedServiceId
   );
   const selectedService = selectedServiceIndex >= 0 ? content.services[selectedServiceIndex] : null;
+  const selectedServiceLink =
+    selectedService?.href?.trim() || `/service/${selectedService?.id ?? ''}`;
 
   const serviceOptions = useMemo(
     () =>
@@ -148,6 +195,18 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
       })),
     [content.services]
   );
+  const mediaOptions = useMemo(() => {
+    const selectedMediaPaths = content.services.flatMap((service) => {
+      const caseStudyPaths =
+        service.caseStudy?.blocks.flatMap((block) =>
+          block.type === 'media-cluster' ? block.items.map((item) => item.src) : []
+        ) ?? [];
+
+      return [service.coverImage, ...caseStudyPaths];
+    });
+
+    return buildMediaOptions(selectedMediaPaths, mediaLibrary);
+  }, [content.services, mediaLibrary]);
 
   const updateContent = (updater: (draft: IServicesContent) => void) => {
     setContent((currentContent) => {
@@ -251,6 +310,103 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
     });
   };
 
+  const refreshMediaLibrary = (nextMediaLibrary: IMediaLibrary) => {
+    setMediaLibrary(nextMediaLibrary);
+  };
+
+  const uploadMedia = async (fileList: FileList | null) => {
+    if (!fileList?.length) {
+      return;
+    }
+
+    setIsUploadingMedia(true);
+    setNotice(null);
+
+    try {
+      const formData = new FormData();
+
+      Array.from(fileList).forEach((file) => {
+        formData.append('files', file);
+      });
+
+      const response = await fetch('/api/admin/media', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const payload = (await response.json().catch(() => null)) as
+        | ({ message?: string } & IMediaLibrary)
+        | null;
+
+      if (!response.ok || !payload || !('items' in payload)) {
+        setNotice({
+          type: 'error',
+          message: payload?.message ?? 'Не удалось загрузить файлы',
+        });
+        return;
+      }
+
+      refreshMediaLibrary(payload);
+      setNotice({
+        type: 'success',
+        message: 'Файлы загружены',
+      });
+    } catch {
+      setNotice({
+        type: 'error',
+        message: 'Не удалось загрузить файлы',
+      });
+    } finally {
+      if (mediaInputRef.current) {
+        mediaInputRef.current.value = '';
+      }
+
+      setIsUploadingMedia(false);
+    }
+  };
+
+  const deleteMedia = async (assetPath: string) => {
+    const targetItem = mediaLibrary.items.find((item) => item.path === assetPath);
+
+    if (!targetItem || !window.confirm(`Удалить файл "${targetItem.name}" из медиатеки?`)) {
+      return;
+    }
+
+    setDeletingMediaPath(assetPath);
+    setNotice(null);
+
+    try {
+      const response = await fetch(`/api/admin/media?path=${encodeURIComponent(assetPath)}`, {
+        method: 'DELETE',
+      });
+
+      const payload = (await response.json().catch(() => null)) as
+        | ({ message?: string } & IMediaLibrary)
+        | null;
+
+      if (!response.ok || !payload || !('items' in payload)) {
+        setNotice({
+          type: 'error',
+          message: payload?.message ?? 'Не удалось удалить файл',
+        });
+        return;
+      }
+
+      refreshMediaLibrary(payload);
+      setNotice({
+        type: 'success',
+        message: 'Файл удален',
+      });
+    } catch {
+      setNotice({
+        type: 'error',
+        message: 'Не удалось удалить файл',
+      });
+    } finally {
+      setDeletingMediaPath(null);
+    }
+  };
+
   const saveContent = async () => {
     setIsSaving(true);
     setNotice(null);
@@ -313,7 +469,7 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
       <SHeader>
         <STitleGroup>
           <STitle>Редактор сервисов</STitle>
-          <SSubtitle>Источник данных: public/content/services.json.</SSubtitle>
+          <SSubtitle>Источник данных: services storage.</SSubtitle>
         </STitleGroup>
 
         <SHeaderActions>
@@ -355,6 +511,76 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
               <SMuted>Сервисов пока нет.</SMuted>
             )}
           </SPanel>
+
+          <SPanel>
+            <SPanelHeader>
+              <SPanelTitle>Медиатека</SPanelTitle>
+              <Button
+                onClick={() => mediaInputRef.current?.click()}
+                loading={isUploadingMedia}
+                disabled={isUploadingMedia}
+              >
+                Загрузить
+              </Button>
+            </SPanelHeader>
+
+            <SHiddenFileInput
+              ref={mediaInputRef}
+              type="file"
+              accept=".png,.jpg,.jpeg,.webp,.gif,.svg,.avif"
+              multiple
+              onChange={(event) => uploadMedia(event.target.files)}
+            />
+
+            <SMediaSummary>
+              <SMediaSummaryRow>
+                <span>Файлов</span>
+                <strong>{mediaLibrary.summary.totalFiles}</strong>
+              </SMediaSummaryRow>
+              <SMediaSummaryRow>
+                <span>Занято</span>
+                <strong>{formatBytes(mediaLibrary.summary.totalSize)}</strong>
+              </SMediaSummaryRow>
+              <SMediaSummaryRow>
+                <span>Используются</span>
+                <strong>{mediaLibrary.summary.usedFiles}</strong>
+              </SMediaSummaryRow>
+            </SMediaSummary>
+
+            {mediaLibrary.items.length > 0 ? (
+              <SMediaList>
+                {mediaLibrary.items.map((item) => (
+                  <SMediaItem key={item.path}>
+                    <SMediaPreview src={item.path} alt={item.name} />
+
+                    <SMediaMeta>
+                      <SMediaName>{item.name}</SMediaName>
+                      <SMediaDetails>
+                        {formatBytes(item.size)} ·{' '}
+                        {new Date(item.updatedAt).toLocaleDateString('ru-RU')}
+                      </SMediaDetails>
+                      <SMediaUsage>
+                        {item.usedIn.length > 0
+                          ? `Используется: ${item.usedIn.length}`
+                          : 'Не используется'}
+                      </SMediaUsage>
+                      <Button
+                        danger
+                        size="small"
+                        onClick={() => deleteMedia(item.path)}
+                        loading={deletingMediaPath === item.path}
+                        disabled={item.usedIn.length > 0}
+                      >
+                        Удалить
+                      </Button>
+                    </SMediaMeta>
+                  </SMediaItem>
+                ))}
+              </SMediaList>
+            ) : (
+              <SMuted>Загруженных файлов пока нет.</SMuted>
+            )}
+          </SPanel>
         </SSidebar>
 
         <SEditor>
@@ -380,7 +606,7 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
                     <Button danger onClick={removeSelectedService}>
                       Удалить сервис
                     </Button>
-                    <Button type="default" href={`/service/${selectedService.id}`} target="_blank">
+                    <Button type="default" href={selectedServiceLink} target="_blank">
                       Открыть сервис
                     </Button>
                   </SInlineActions>
@@ -418,7 +644,20 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
                   </SFieldLabel>
 
                   <SFieldLabel>
-                    Description
+                    List description
+                    <TextArea
+                      rows={4}
+                      value={selectedService.listDescription}
+                      onChange={(event) =>
+                        updateSelectedService((service) => {
+                          service.listDescription = event.target.value;
+                        })
+                      }
+                    />
+                  </SFieldLabel>
+
+                  <SFieldLabel>
+                    Page description
                     <TextArea
                       rows={4}
                       value={selectedService.description}
@@ -432,12 +671,41 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
 
                   <SFieldLabel>
                     Cover image
-                    <Input
-                      size="large"
+                    <Select
                       value={selectedService.coverImage}
+                      options={mediaOptions}
+                      allowClear
+                      showSearch
+                      placeholder="Выберите файл"
+                      onClear={() =>
+                        updateSelectedService((service) => {
+                          service.coverImage = '';
+                        })
+                      }
                       onChange={(event) =>
                         updateSelectedService((service) => {
-                          service.coverImage = event.target.value;
+                          service.coverImage = event ?? '';
+                        })
+                      }
+                      size="large"
+                    />
+                    {selectedService.coverImage && (
+                      <SSelectPreview
+                        src={selectedService.coverImage}
+                        alt={selectedService.title || 'Cover image'}
+                      />
+                    )}
+                  </SFieldLabel>
+
+                  <SFieldLabel>
+                    External href
+                    <Input
+                      size="large"
+                      placeholder="https://example.com"
+                      value={selectedService.href ?? ''}
+                      onChange={(event) =>
+                        updateSelectedService((service) => {
+                          service.href = event.target.value;
                         })
                       }
                     />
@@ -724,17 +992,34 @@ export const AdminServicesEditor = ({ initialContent }: IAdminServicesEditorProp
 
                                     <SFieldLabel>
                                       Src
-                                      <Input
-                                        size="large"
+                                      <Select
                                         value={item.src}
+                                        options={mediaOptions}
+                                        allowClear
+                                        showSearch
+                                        placeholder="Выберите файл"
+                                        onClear={() =>
+                                          updateBlock(blockIndex, (draftBlock) => {
+                                            const mediaBlock =
+                                              draftBlock as IServiceMediaClusterBlock;
+                                            mediaBlock.items[itemIndex].src = '';
+                                          })
+                                        }
                                         onChange={(event) =>
                                           updateBlock(blockIndex, (draftBlock) => {
                                             const mediaBlock =
                                               draftBlock as IServiceMediaClusterBlock;
-                                            mediaBlock.items[itemIndex].src = event.target.value;
+                                            mediaBlock.items[itemIndex].src = event ?? '';
                                           })
                                         }
+                                        size="large"
                                       />
+                                      {item.src && (
+                                        <SSelectPreview
+                                          src={item.src}
+                                          alt={item.alt || `Media item ${itemIndex + 1}`}
+                                        />
+                                      )}
                                     </SFieldLabel>
 
                                     <SFieldLabel>

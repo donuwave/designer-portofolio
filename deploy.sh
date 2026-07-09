@@ -9,9 +9,11 @@ SERVER_HOST="201.51.30.97"
 SERVER_USER="root"
 SERVER_PORT="22"
 SERVER_IMAGES_PATH="/var/www/docker-images"
+SERVER_DATA_PATH="/var/www/portfolio-data"
 
 CONTAINER_PORT="8080"
 SERVER_PORT_APP="8081"
+CONTAINER_DATA_PATH="/data/designer-portfolio"
 
 BUILD_ENV="prod"
 
@@ -57,6 +59,13 @@ IMAGE_NAME="${IMAGE_NAME}"
 REMOTE_TAR_PATH="${REMOTE_TAR_PATH}"
 CONTAINER_PORT="${CONTAINER_PORT}"
 SERVER_PORT_APP="${SERVER_PORT_APP}"
+SERVER_DATA_PATH="${SERVER_DATA_PATH}"
+CONTAINER_DATA_PATH="${CONTAINER_DATA_PATH}"
+
+echo "Preparing persistent storage..."
+mkdir -p "\$SERVER_DATA_PATH/content"
+mkdir -p "\$SERVER_DATA_PATH/uploads/services"
+chown -R 1001:1001 "\$SERVER_DATA_PATH"
 
 echo "Stopping old container..."
 docker stop "\$APP_NAME" || true
@@ -73,6 +82,8 @@ docker run \
   --restart unless-stopped \
   -e ADMIN_PASSWORD="ДаниилИАртемНеГеи" \
   -e ADMIN_SESSION_SECRET="designer-portfolio-admin-local-secret" \
+  -e CONTENT_STORAGE_DIR="\$CONTAINER_DATA_PATH" \
+  -v "\$SERVER_DATA_PATH:\$CONTAINER_DATA_PATH" \
   -p "$SERVER_PORT_APP:$CONTAINER_PORT" \
   -d \
   "$IMAGE_TAG"
