@@ -6,8 +6,9 @@ import { getServices } from '@/shared/lib/content/services';
 import { ServicesList } from '@/widgets/services-list';
 
 import { getHomeInformation } from '../lib/home-information';
-import { SAvatar, SButton, SHome } from './home.styles';
-import { avatar, ButtonHoverSvg } from '@/shared/assets';
+import { SAvatar, SHome } from './home.styles';
+import { avatar } from '@/shared/assets';
+import { WriteMe } from '@/shared/components';
 
 export const HomePage = async () => {
   const [homeInformation, services] = await Promise.all([getHomeInformation(), getServices()]);
@@ -23,10 +24,7 @@ export const HomePage = async () => {
 
       <ServicesList items={services} />
 
-      <SButton href="https://t.me/Artyom_Kartsev" size="large">
-        <ButtonHoverSvg className="hover-svg" />
-        Написать мне
-      </SButton>
+      <WriteMe />
 
       <ContactsCard
         items={homeInformation.contacts.items}

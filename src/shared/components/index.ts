@@ -3,3 +3,4 @@ export * from './item-card';
 export * from './works-card';
 export * from './contacts-card';
 export * from './tools-card';
+export * from './write-me';

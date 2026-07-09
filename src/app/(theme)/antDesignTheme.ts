@@ -24,7 +24,6 @@ export const getAntdTheme = (styledComponentsTheme: DefaultTheme): ThemeConfig =
       colorPrimaryActive: '#FFFFFF',
       defaultColor: '#FFFFFF',
       defaultBg: '#3844EE',
-      defaultHoverBg: '#7079FF',
       defaultActiveBg: '#7079FF',
       defaultBorderColor: 'transparent',
       defaultHoverBorderColor: 'transparent',

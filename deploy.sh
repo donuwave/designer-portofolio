@@ -69,11 +69,13 @@ docker load -i "\$REMOTE_TAR_PATH"
 
 echo "Starting new container..."
 docker run \
-  --name "\$APP_NAME" \
+  --name "$APP_NAME" \
   --restart unless-stopped \
-  -p "\$SERVER_PORT_APP:\$CONTAINER_PORT" \
+  -e ADMIN_PASSWORD="ДаниилИАртемНеГеи" \
+  -e ADMIN_SESSION_SECRET="designer-portfolio-admin-local-secret" \
+  -p "$SERVER_PORT_APP:$CONTAINER_PORT" \
   -d \
-  "\$IMAGE_TAG"
+  "$IMAGE_TAG"
 
 echo "Cleaning dangling images..."
 docker image prune -f

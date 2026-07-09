@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button } from 'antd';
 
-import { ContactsCard } from '@/shared/components';
+import { ContactsCard, WriteMe } from '@/shared/components';
 import {
   IService,
   IServiceCaseStudyBlock,
@@ -25,8 +25,6 @@ import {
   SMediaImage,
   SServicePage,
 } from './servicePage.styles';
-import { SButton } from '@/screens/home-page/ui/home.styles';
-import { ButtonHoverSvg } from '@/shared/assets';
 
 interface IServiceContacts {
   items: {
@@ -76,12 +74,18 @@ const renderMediaCluster = (block: IServiceMediaClusterBlock, key: string) => {
 
   return (
     <SMediaCluster key={key} $layout={block.layout}>
-      <SMediaCard $layout={block.layout} $size="large">
+      <SMediaCard cornerRadius={120} cornerSmoothing={1} $layout={block.layout} $size="large">
         <SMediaImage src={featuredItem.src} alt={featuredItem.alt} />
       </SMediaCard>
 
       {secondaryItems.map((item) => (
-        <SMediaCard key={`${key}-${item.alt}`} $layout={block.layout} $size="small">
+        <SMediaCard
+          cornerRadius={120}
+          cornerSmoothing={1}
+          key={`${key}-${item.alt}`}
+          $layout={block.layout}
+          $size="small"
+        >
           <SMediaImage src={item.src} alt={item.alt} />
         </SMediaCard>
       ))}
@@ -121,10 +125,7 @@ export const ServicePage: FC<IServicePage> = ({ service, contacts }) => {
         {service.caseStudy?.blocks.map(renderCaseStudyBlock)}
       </SCaseStudyFlow>
 
-      <SButton size="large">
-        <ButtonHoverSvg className="hover-svg" />
-        Написать мне
-      </SButton>
+      <WriteMe />
 
       <ContactsCard items={contacts.items} updatedText={contacts.updatedText} />
     </SServicePage>

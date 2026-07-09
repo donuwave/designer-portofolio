@@ -9,6 +9,7 @@ export const SContainer = styled.div`
   padding: 80px 0 100px 0;
   justify-content: center;
   gap: 14px;
+  justify-self: normal;
 
   @media (max-width: 800px) {
     margin-top: 40px;

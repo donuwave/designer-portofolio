@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import { Squircle } from '@squircle-js/react';
+
+import { layout } from '@/shared/config/layout';
 
 export const SServicePage = styled.div`
   display: grid;
-  gap: 48px;
-  padding: 48px 16px 16px;
+  justify-items: center;
+  gap: ${layout.sectionGap};
+  padding: ${layout.pagePadding} ${layout.pagePadding} ${layout.pagePadding};
 `;
 
 export const SCaseStudyFlow = styled.div`
@@ -14,10 +18,10 @@ export const SCaseStudyFlow = styled.div`
 
 export const SCaseStudyCard = styled.section`
   position: relative;
-  width: min(390px, calc(100vw - 32px));
+  width: ${layout.compactWidth};
   display: grid;
   gap: 12px;
-  padding: 24px;
+  padding: ${layout.cardPadding};
   border-radius: 48px;
   background: #ffffff;
   box-shadow:
@@ -25,6 +29,10 @@ export const SCaseStudyCard = styled.section`
     0 4px 10px rgba(0, 0, 0, 0.08);
   z-index: 1;
   justify-self: center;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.compactMaxWidth}px);
+  }
 `;
 
 export const SCaseStudyCardTitle = styled.h2`
@@ -82,7 +90,7 @@ type MediaClusterProps = {
 
 export const SMediaCluster = styled.section<MediaClusterProps>`
   position: relative;
-  max-width: 1100px;
+  width: ${layout.wideWidth};
   margin: 0 auto;
   display: grid;
   grid-template-columns: ${({ $layout }) =>
@@ -93,8 +101,12 @@ export const SMediaCluster = styled.section<MediaClusterProps>`
   gap: 24px;
   z-index: 1;
 
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.wideMaxWidth}px);
+  }
+
   @media (max-width: 990px) {
-    grid-template-columns: 390px;
+    grid-template-columns: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.compactMaxWidth}px);
     grid-template-rows: auto;
   }
 
@@ -108,7 +120,7 @@ type MediaCardProps = {
   $layout: 'feature-left' | 'feature-right';
 };
 
-export const SMediaCard = styled.div<MediaCardProps>`
+export const SMediaCard = styled(Squircle)<MediaCardProps>`
   overflow: hidden;
   border-radius: 120px;
   min-height: ${({ $size }) => ($size === 'large' ? '420px' : '198px')};
@@ -143,9 +155,13 @@ export const SMediaImage = styled.img`
 `;
 
 export const SCtaWrap = styled.div`
-  width: min(760px, calc(100vw - 32px));
+  width: ${layout.wideWidth};
   padding-top: 16px;
   z-index: 1;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.wideMaxWidth}px);
+  }
 `;
 
 export const SContactsWrap = styled.div`

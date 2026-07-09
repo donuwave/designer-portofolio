@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { SIcons, STitle, SToolsCard } from './toolsCard.styles';
+import { SIcons, SIconSlot, STitle, SToolsCard } from './toolsCard.styles';
 
 interface ToolsCardProps {
   title: string;
@@ -10,7 +10,7 @@ export const ToolsCard: FC<ToolsCardProps> = ({ title, icons }) => {
   return (
     <SToolsCard>
       <STitle>{title}</STitle>
-      <SIcons>{icons.map((icon) => icon)}</SIcons>
+      <SIcons>{icons.map((icon, index) => <SIconSlot key={index}>{icon}</SIconSlot>)}</SIcons>
     </SToolsCard>
   );
 };

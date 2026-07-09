@@ -1,44 +1,79 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
+import { layout } from '@/shared/config/layout';
+
+const iconWidth = `calc(24px * ${layout.compactScale})`;
+const iconHeight = `calc(22px * ${layout.compactScale})`;
+
 export const SWrapper = styled.div`
   width: 100%;
   display: grid;
   justify-content: center;
-  padding: 0 16px;
-
-  @media (max-width: 425px) {
-    justify-content: normal;
-  }
+  padding: 0 ${layout.pagePadding};
 `;
 
 export const SHeader = styled.header`
-  box-shadow: 0 0 54px -0.19px #bcbcbc inset;
   background: rgba(14, 14, 14, 1);
-  max-width: 390px;
-  width: 390px;
-  height: 72px;
+  box-shadow:
+    0 0 46px -2.88px rgba(88, 88, 88, 1) inset,
+    0 0 30px -0.77px rgba(50, 50, 50, 1) inset,
+    0 0 22px -0.58px rgba(52, 52, 52, 1) inset,
+    0 0 14px -0.19px rgba(188, 188, 188, 1) inset;
+
+  width: ${layout.compactWidth};
+  height: calc(72px * ${layout.compactScale});
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 32px;
-  border-radius: 28px;
+  padding: calc(24px * ${layout.compactScale}) calc(32px * ${layout.compactScale});
+  border-radius: calc(28px * ${layout.compactScale});
   z-index: 10;
+  transition: background 0.25s ease;
 
-  @media (max-width: 425px) {
-    width: 100% !important;
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.compactMaxWidth}px);
+    height: 72px;
+    padding: 24px 32px;
+    border-radius: 28px;
   }
 `;
 
-export const SLink = styled(Link)`
-  text-decoration: underline !important;
-  font-weight: bold;
-  font-size: 14px;
+export const SIconLink = styled(Link)`
+  width: ${iconWidth};
+  height: ${iconHeight};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #ffffff;
-  transition: 0.2s;
+  transform-origin: center;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: 24px;
+    height: 22px;
+  }
+`;
+
+export const SIcon = styled.svg`
+  width: 100%;
+  height: 100%;
+`;
+
+export const STextLink = styled(Link)`
+  font-weight: bold;
+  font-size: calc(14px * ${layout.compactScale});
+  color: #ffffff;
   cursor: pointer;
+  transition: color 0.2s ease;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 
   &:hover {
-    color: #7079ff;
+    text-decoration: underline !important;
   }
 `;

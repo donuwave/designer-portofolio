@@ -5,6 +5,8 @@ import { iteco, redCat } from '@/shared/assets';
 
 import {
   SBr,
+  SCompanyLogo,
+  SDescription,
   SInfo,
   SInfoText,
   SList,
@@ -28,8 +30,10 @@ export const WorksCard = () => {
       <SText>Места работы</SText>
 
       <SList>
-        <SWork>
-          <Image alt="iteco" src={iteco} width={48} height={48} priority />
+        <SWork cornerRadius={20} cornerSmoothing={1}>
+          <SCompanyLogo>
+            <Image alt="iteco" src={iteco} width={48} height={48} priority />
+          </SCompanyLogo>
 
           <SWorkItem>
             <STitle>ITECO Technology</STitle>
@@ -38,7 +42,9 @@ export const WorksCard = () => {
         </SWork>
 
         <SWork>
-          <Image alt="iteco" src={redCat} width={48} height={48} priority />
+          <SCompanyLogo>
+            <Image alt="iteco" src={redCat} width={48} height={48} priority />
+          </SCompanyLogo>
 
           <SWorkItem>
             <STitle>RedCat</STitle>
@@ -51,14 +57,16 @@ export const WorksCard = () => {
 
       <SInfoText>
         <STitlePrice>900 000 000 ₽</STitlePrice>
-        <SInfo>Стоимость проекта, в котором я принимал участие</SInfo>
+        <SDescription>Стоимость проекта, в котором я принимал участие</SDescription>
       </SInfoText>
 
       <SBr />
 
       <SInfoText>
         <STitlePrice>88,8% Adoption Rate</STitlePrice>
-        <SInfo>Результат внедрения геймификации в корпоративное приложение для сотрудников</SInfo>
+        <SDescription>
+          Результат внедрения геймификации в корпоративное приложение для сотрудников
+        </SDescription>
       </SInfoText>
 
       <STools>

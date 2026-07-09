@@ -9,7 +9,7 @@ interface IItemCard {
 
 export const ItemCard: FC<IItemCard> = ({ title, text }) => {
   return (
-    <SItemCard>
+    <SItemCard cornerRadius={48} cornerSmoothing={1}>
       <STitle>{title}</STitle>
 
       <SText>{text}</SText>

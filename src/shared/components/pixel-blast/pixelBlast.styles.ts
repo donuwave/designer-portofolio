@@ -22,7 +22,7 @@ export const SViewportDots = styled.div`
   pointer-events: none;
   z-index: 10000;
 
-  @media (max-width: 720px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;

@@ -1,16 +1,22 @@
-import Link from 'next/link';
 import styled from 'styled-components';
+import { Squircle } from '@squircle-js/react';
+
+import { layout } from '@/shared/config/layout';
 
 export const SContainer = styled.div`
   display: grid;
-  width: 100%;
+  width: ${layout.wideWidth};
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
-  padding: 100px 0;
-  max-width: 1108px;
+  gap: calc(32px * ${layout.wideScale});
+  padding: ${layout.sectionPadding} 0;
   margin: 0 auto;
 
-  @media (max-width: 1080px) {
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.wideMaxWidth}px);
+    gap: 32px;
+  }
+
+  @media (max-width: 820px) {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -19,18 +25,17 @@ export const SContainer = styled.div`
   }
 `;
 
-export const SItem = styled(Link)`
+export const SItem = styled(Squircle)`
   display: grid;
-  grid-template-rows: 213px 70px;
-  gap: 6px;
+  grid-template-rows: calc(213px * ${layout.wideScale}) calc(70px * ${layout.wideScale});
+  gap: calc(6px * ${layout.wideScale});
   justify-items: center;
   align-content: space-between;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: calc(32px * ${layout.wideScale});
+  padding-bottom: calc(32px * ${layout.wideScale});
 
   aspect-ratio: 1 / 1;
   width: 100%;
-  border-radius: 28px;
   overflow: hidden;
   position: relative;
   box-shadow:
@@ -39,34 +44,59 @@ export const SItem = styled(Link)`
     0 0 32px -0.58px rgba(52, 52, 52, 1) inset,
     0 0 24px -0.19px rgba(188, 188, 188, 1) inset;
   z-index: 1000;
-  background: #111;
+  background: rgba(14, 14, 14, 1);
   color: #ffffff;
   text-decoration: none;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    grid-template-rows: 213px 70px;
+    gap: 6px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
 `;
 
 export const SImage = styled.img`
-  width: 213px;
-  height: 213px;
+  width: calc(213px * ${layout.wideScale});
+  height: calc(213px * ${layout.wideScale});
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    width: 213px;
+    height: 213px;
+  }
 `;
 
 export const SText = styled.div`
   justify-self: left;
   display: grid;
   align-content: start;
-  gap: 8px;
-  padding: 0 32px;
+  gap: calc(8px * ${layout.wideScale});
+  padding: 0 calc(32px * ${layout.wideScale});
   height: 100%;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    gap: 8px;
+    padding: 0 32px;
+  }
 `;
 
 export const STitle = styled.p`
-  font-size: 16px;
+  font-size: calc(16px * ${layout.wideScale});
   color: rgba(255, 255, 255, 1);
   font-weight: 700;
   letter-spacing: -4%;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 16px;
+  }
 `;
 
 export const SDescription = styled.p`
   color: rgba(124, 124, 124, 1);
-  font-size: 14px;
+  font-size: calc(14px * ${layout.wideScale});
   line-height: 140%;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 `;

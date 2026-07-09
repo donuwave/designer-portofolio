@@ -4,6 +4,8 @@ import { Effect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
+import { layout } from '@/shared/config/layout';
+
 import { SContainer, SPixelBlast, SViewportDot, SViewportDots } from './pixelBlast.styles';
 
 type PixelBlastVariant = 'square' | 'circle' | 'triangle' | 'diamond';
@@ -357,9 +359,9 @@ void main(){
 `;
 
 const MAX_CLICKS = 10;
-const VIEWPORT_DOT_OFFSET = 'clamp(16px, 2.5vw, 28px)';
-const VIEWPORT_DOT_INNER_X = '33.333%';
-const VIEWPORT_DOT_OUTER_X = '66.667%';
+const VIEWPORT_DOT_OFFSET = layout.viewportDotOffset;
+const VIEWPORT_DOT_INNER_X = layout.viewportDotCompactLeft;
+const VIEWPORT_DOT_OUTER_X = layout.viewportDotCompactRight;
 const VIEWPORT_DOT_CENTER_Y = '50%';
 type ViewportDotConfig = {
   id: string;
