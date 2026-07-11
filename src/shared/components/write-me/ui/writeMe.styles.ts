@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 import { Button } from 'antd';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 
 export const SButton = styled(Button)`
   &.ant-btn {
     width: ${layout.wideWidth};
-    aspect-ratio: ${layout.wideMaxWidth} / ${layout.buttonHeight};
+    height: ${fluidBetween(157, 250.8)};
+    border-radius: ${fluidBetween(48, 76.8)};
+    letter-spacing: -4%;
 
     background: rgba(14, 14, 14, 1) !important;
     overflow: hidden;
+    font-size: ${fluidBetween(24, 38.4)};
+    line-height: 1.6;
 
     box-shadow:
       0 0 64px -2.88px rgba(88, 88, 88, 1) inset,
@@ -23,6 +27,9 @@ export const SButton = styled(Button)`
 
     @media (max-width: ${layout.noScaleBreakpoint}px) {
       width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.wideMaxWidth}px);
+      height: 157px;
+      border-radius: 48px;
+      font-size: 24px;
     }
 
     &:hover {

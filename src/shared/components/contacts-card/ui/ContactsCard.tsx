@@ -1,4 +1,7 @@
+'use client';
+
 import React, { FC } from 'react';
+import { useFluidValue } from '@/shared/lib/useFluidValue';
 
 import { FooterInformation, FooterTop } from '@/shared/assets';
 
@@ -26,11 +29,13 @@ interface IContactsCard {
 }
 
 export const ContactsCard: FC<IContactsCard> = ({ items }) => {
+  const cornerRadius = useFluidValue(48, 76.8);
+
   return (
     <SContainer>
       <SBottomEffect />
 
-      <SCard cornerRadius={48} cornerSmoothing={1}>
+      <SCard cornerRadius={cornerRadius} cornerSmoothing={1}>
         <SContent>
           <FooterTop />
           <FooterInformation />

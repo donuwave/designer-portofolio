@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Squircle } from '@squircle-js/react';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 import footerBackground from '@/shared/assets/img/footer-background.png';
 
 export const SContainer = styled.div`
@@ -81,15 +81,23 @@ export const SContactItem = styled.div`
   justify-content: space-between;
   padding: 14px 0;
   gap: 16px;
+  font-size: ${fluidBetween(14, 22.4)};
+  line-height: 1.6;
 
   span {
     color: #7c7c7c;
+  }
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
   }
 `;
 
 export const SLink = styled(Link)`
   text-decoration: underline !important;
   color: #191919;
+  font-size: inherit;
+  line-height: inherit;
   transition: color 0.2s;
 
   &:hover {
@@ -99,4 +107,10 @@ export const SLink = styled(Link)`
 
 export const SMetaText = styled.span`
   color: #7c7c7c;
+  font-size: ${fluidBetween(14, 22.4)};
+  line-height: 1.6;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 `;

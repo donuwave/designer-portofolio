@@ -4,8 +4,8 @@
       "id": "iteco-driver",
       "title": "ITECO.Водитель",
       "listDescription": "ITECO.Водитель — мобильное приложение для водителей ИТЕКО",
-      "description": "ITECO.Водитель — мобильное приложение для водителей ИТЕКО",
-      "coverImage": "",
+      "description": "ITECO.Водитель — мобильное приложение для водителей ИТЕКО 2",
+      "coverImage": "/uploads/services/file.png",
       "caseStudy": {
         "blocks": [
           {
@@ -136,7 +136,7 @@
       "title": "ITECO.Сотрудник",
       "listDescription": "Поздравительные открытки",
       "description": "Поздравительные открытки",
-      "coverImage": "",
+      "coverImage": "/uploads/services/file.png",
       "caseStudy": {
         "blocks": [
           {
@@ -202,7 +202,7 @@
       "title": "ITECO. Заказчик ",
       "listDescription": "Iteco Customer. Сервис для потенциального заказчика.",
       "description": "Iteco Customer. Сервис для потенциального заказчика.",
-      "coverImage": "/uploads/services/presents.png",
+      "coverImage": "/uploads/services/file.png",
       "caseStudy": {
         "blocks": [
           {
@@ -243,7 +243,7 @@
       "title": "Новый сервис",
       "listDescription": "",
       "description": "",
-      "coverImage": "",
+      "coverImage": "/uploads/services/file.png",
       "href": "https://technology.iteco.com/",
       "caseStudy": {
         "blocks": []

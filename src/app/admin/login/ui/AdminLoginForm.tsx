@@ -15,6 +15,27 @@ const SPage = styled.main`
   place-items: center;
   padding: 24px;
   background: #0f0f10;
+
+  .ant-btn {
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .ant-btn:not(:disabled):not(.ant-btn-disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  }
+
+  .ant-btn-default:not(.ant-btn-dangerous):not(:disabled):not(.ant-btn-disabled):hover,
+  .ant-btn-color-default:not(.ant-btn-dangerous):not(:disabled):not(.ant-btn-disabled):hover {
+    color: #191919 !important;
+    border-color: #aeb7c4 !important;
+    background: #eef2f6 !important;
+  }
 `;
 
 const SPanel = styled.section`

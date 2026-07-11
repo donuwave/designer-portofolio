@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 import { Squircle } from '@squircle-js/react';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 
 export const SServicePage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${layout.sectionGap};
+  min-height: calc(100dvh - ${layout.headerOffset});
+  padding: ${layout.pagePadding} ${layout.pagePadding} 0 ${layout.pagePadding};
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    min-height: calc(100dvh - (${layout.headerTopOffset} + ${layout.headerBaseHeight}px));
+  }
+`;
+
+export const SFooterArea = styled.div`
+  width: 100%;
+  margin-top: auto;
   display: grid;
   justify-items: center;
-  gap: ${layout.sectionGap};
-  padding: ${layout.pagePadding} ${layout.pagePadding} ${layout.pagePadding};
 `;
 
 export const SCaseStudyFlow = styled.div`
@@ -21,8 +34,8 @@ export const SCaseStudyCard = styled.section`
   width: ${layout.compactWidth};
   display: grid;
   gap: 12px;
-  padding: ${layout.cardPadding};
-  border-radius: 48px;
+  padding: ${fluidBetween(32, 51.2)};
+  border-radius: ${fluidBetween(48, 76.8)};
   background: #ffffff;
   box-shadow:
     0 18px 36px rgba(0, 0, 0, 0.18),
@@ -32,38 +45,57 @@ export const SCaseStudyCard = styled.section`
 
   @media (max-width: ${layout.noScaleBreakpoint}px) {
     width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.compactMaxWidth}px);
+    padding: 32px;
+    border-radius: 48px;
   }
 `;
 
 export const SCaseStudyCardTitle = styled.h2`
   margin: 0;
   color: #191919;
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: ${fluidBetween(16, 25.6)};
+  line-height: 1.6;
   font-weight: 700;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 16px;
+  }
 `;
 
 export const SCaseStudyHeroTitle = styled.h1`
   margin: 0;
   color: #191919;
-  font-size: 24px;
+  font-size: ${fluidBetween(24, 38.4)};
+  line-height: 1.2;
   font-weight: 700;
   text-wrap: balance;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 24px;
+  }
 `;
 
 export const SCaseStudyCardText = styled.p`
   margin: 0;
   color: #7a7a7a;
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: ${fluidBetween(14, 22)};
+  line-height: 1.57;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 `;
 
 export const SCaseStudyHeroText = styled.p`
   margin: 0;
   max-width: 640px;
   color: #5f5f5f;
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: ${fluidBetween(14, 22.4)};
+  line-height: 1.6;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 `;
 
 export const SCaseStudyBullets = styled.ul`
@@ -80,8 +112,12 @@ export const SCaseStudyBulletGroup = styled.div`
 `;
 
 export const SCaseStudyBullet = styled.li`
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: ${fluidBetween(14, 22)};
+  line-height: 1.57;
+
+  @media (max-width: ${layout.noScaleBreakpoint}px) {
+    font-size: 14px;
+  }
 `;
 
 type MediaClusterProps = {
@@ -113,7 +149,10 @@ export const SMediaCluster = styled.section<MediaClusterProps>`
   }
 
   @media (max-width: 990px) {
-    grid-template-columns: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.compactMaxWidth}px);
+    grid-template-columns: min(
+      calc(100vw - (${layout.pagePadding} * 2)),
+      ${layout.compactMaxWidth}px
+    );
     grid-template-rows: auto;
   }
 

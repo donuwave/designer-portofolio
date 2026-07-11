@@ -2,7 +2,9 @@ const COMPACT_MAX_WIDTH = 390;
 const COMPACT_DESKTOP_WIDTH = 624;
 const WIDE_MAX_WIDTH = 1108;
 const WIDE_DESKTOP_WIDTH = 1772.8;
-const BUTTON_HEIGHT = 156;
+const BUTTON_HEIGHT = 157;
+const FLUID_MIN_VIEWPORT = 1200;
+const FLUID_MAX_VIEWPORT = 1920;
 const HEADER_TOP_OFFSET = '42px';
 const HEADER_BASE_HEIGHT = 72;
 const PAGE_PADDING = 'clamp(16px, 4vw, 48px)';
@@ -17,11 +19,16 @@ const COMPACT_SCALE = `(${COMPACT_WIDTH} / ${COMPACT_MAX_WIDTH}px)`;
 const HEADER_HEIGHT = `calc(${HEADER_BASE_HEIGHT}px * ${COMPACT_SCALE})`;
 const HEADER_OFFSET = `calc(${HEADER_TOP_OFFSET} + ${HEADER_HEIGHT})`;
 
+export const fluidBetween = (min: number, max: number) =>
+  `max(${min}px, calc(${min}px + ${max - min} * ((100vw - ${FLUID_MIN_VIEWPORT}px) / ${FLUID_MAX_VIEWPORT - FLUID_MIN_VIEWPORT})))`;
+
 export const layout = {
   compactMaxWidth: COMPACT_MAX_WIDTH,
   compactDesktopWidth: COMPACT_DESKTOP_WIDTH,
   wideMaxWidth: WIDE_MAX_WIDTH,
   wideDesktopWidth: WIDE_DESKTOP_WIDTH,
+  fluidMinViewport: FLUID_MIN_VIEWPORT,
+  fluidMaxViewport: FLUID_MAX_VIEWPORT,
   noScaleBreakpoint: 880,
   buttonHeight: BUTTON_HEIGHT,
   headerTopOffset: HEADER_TOP_OFFSET,

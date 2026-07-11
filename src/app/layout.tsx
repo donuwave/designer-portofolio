@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     icon: [
       {
         media: '(prefers-color-scheme: light)',
-        url: '/favicon-light.ico',
-        href: '/favicon-light.ico',
+        url: '/favicon.svg',
+        href: '/favicon.svg',
       },
       {
         media: '(prefers-color-scheme: dark)',
-        url: '/favicon-dark.ico',
-        href: '/favicon-dark.ico',
+        url: '/favicon.svg',
+        href: '/favicon.svg',
       },
     ],
   },

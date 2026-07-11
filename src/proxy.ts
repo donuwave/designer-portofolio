@@ -68,7 +68,7 @@ export async function proxy(request: NextRequest) {
     pathname === '/changelog.json' ||
     pathname === '/robots.txt' ||
     pathname === '/service-worker.js' ||
-    pathname === '/favicon-dark.ico';
+    pathname === '/favicon.svg';
 
   if (pathIgnoreName) {
     return NextResponse.next();

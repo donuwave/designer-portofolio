@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { Squircle } from '@squircle-js/react';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 
 export const SItemCard = styled(Squircle)`
   display: grid;
   gap: calc(16px * ${layout.compactScale});
   position: relative;
-  padding: calc(32px * ${layout.compactScale});
+  padding: ${fluidBetween(32, 51.2)};
   background: #ffffff;
   width: ${layout.compactWidth};
   z-index: 1;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 
 const iconWidth = `calc(24px * ${layout.compactScale})`;
 const iconHeight = `calc(22px * ${layout.compactScale})`;
@@ -31,7 +31,7 @@ export const SHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: calc(24px * ${layout.compactScale}) calc(32px * ${layout.compactScale});
-  border-radius: calc(28px * ${layout.compactScale});
+  border-radius: ${fluidBetween(28, 44)};
   z-index: 10;
   transition: background 0.25s ease;
 
@@ -68,10 +68,11 @@ export const SIcon = styled.svg`
 
 export const STextLink = styled(Link)`
   font-weight: bold;
-  font-size: calc(14px * ${layout.compactScale});
+  font-size: ${fluidBetween(14, 22.4)};
   color: #ffffff;
   cursor: pointer;
   transition: color 0.2s ease;
+  letter-spacing: -4%;
 
   @media (max-width: ${layout.noScaleBreakpoint}px) {
     font-size: 14px;

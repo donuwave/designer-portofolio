@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { layout } from '@/shared/config/layout';
+import { fluidBetween, layout } from '@/shared/config/layout';
 
 export const SToolsCard = styled.div`
   background: rgba(240, 240, 240, 1);
@@ -20,11 +20,12 @@ export const SToolsCard = styled.div`
 
 export const STitle = styled.h3`
   color: rgba(25, 25, 25, 1);
-  font-size: calc(14px * ${layout.compactScale});
-  line-height: 120%;
+  font-size: ${fluidBetween(14, 22.4)};
+  line-height: 1.6;
   font-weight: 700;
   justify-self: center;
   text-align: center;
+  letter-spacing: -4%;
 
   @media (max-width: ${layout.noScaleBreakpoint}px) {
     font-size: 14px;

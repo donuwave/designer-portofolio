@@ -20,6 +20,7 @@ import {
   SCaseStudyCardTitle,
   SCaseStudyFlow,
   SCtaWrap,
+  SFooterArea,
   SMediaCard,
   SMediaCluster,
   SMediaImage,
@@ -133,9 +134,11 @@ export const ServicePage: FC<IServicePage> = ({ service, contacts }) => {
         {service.caseStudy?.blocks.map(renderCaseStudyBlock)}
       </SCaseStudyFlow>
 
-      <WriteMe />
+      <SFooterArea>
+        <WriteMe />
 
-      <ContactsCard items={contacts.items} updatedText={contacts.updatedText} />
+        <ContactsCard items={contacts.items} updatedText={contacts.updatedText} />
+      </SFooterArea>
     </SServicePage>
   );
 };

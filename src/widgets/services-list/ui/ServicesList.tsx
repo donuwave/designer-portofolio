@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useFluidValue } from '@/shared/lib/useFluidValue';
 
 import { IService } from '@/shared/lib/content/services';
 
@@ -11,6 +14,8 @@ interface IServicesList {
 }
 
 export const ServicesList = ({ items }: IServicesList) => {
+  const cornerRadius = useFluidValue(64, 102.4);
+
   return (
     <SContainer>
       {items.map((service) => {
@@ -24,7 +29,7 @@ export const ServicesList = ({ items }: IServicesList) => {
               rel={isExternal ? 'noreferrer' : undefined}
               target={isExternal ? '_blank' : undefined}
             >
-              <SItem cornerRadius={64} cornerSmoothing={1}>
+              <SItem cornerRadius={cornerRadius} cornerSmoothing={1}>
                 <SImage src={service.coverImage} alt={service.title} />
 
                 <SText>

@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 
 import { iteco, redCat } from '@/shared/assets';
+import { useFluidValue } from '@/shared/lib/useFluidValue';
 
 import {
   SBr,
@@ -24,9 +27,10 @@ import { getTools } from '../lib/get-tools';
 
 export const WorksCard = () => {
   const tools = getTools();
+  const cornerRadius = useFluidValue(48, 76.8);
 
   return (
-    <SWorks>
+    <SWorks cornerRadius={cornerRadius} cornerSmoothing={1}>
       <SText>Места работы</SText>
 
       <SList>
@@ -41,7 +45,7 @@ export const WorksCard = () => {
           </SWorkItem>
         </SWork>
 
-        <SWork>
+        <SWork cornerRadius={20} cornerSmoothing={1}>
           <SCompanyLogo>
             <Image alt="iteco" src={redCat} width={48} height={48} priority />
           </SCompanyLogo>
