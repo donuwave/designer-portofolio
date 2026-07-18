@@ -122,30 +122,23 @@ export const SCaseStudyBullet = styled.li`
 
 type MediaClusterProps = {
   $layout: 'feature-left' | 'feature-right';
-  $singleItem: boolean;
 };
 
 export const SMediaCluster = styled.section<MediaClusterProps>`
   position: relative;
-  width: ${({ $singleItem }) => ($singleItem ? layout.compactWidth : layout.wideWidth)};
+  width: ${layout.wideWidth};
   margin: 0 auto;
   display: grid;
-  grid-template-columns: ${({ $layout, $singleItem }) =>
-    $singleItem
-      ? 'minmax(0, 1fr)'
-      : $layout === 'feature-left'
-        ? 'minmax(0, 1.8fr) minmax(0, 1fr)'
-        : 'minmax(0, 1fr) minmax(0, 1.8fr)'};
-  grid-template-rows: ${({ $singleItem }) =>
-    $singleItem ? 'minmax(260px, auto)' : 'repeat(2, minmax(170px, 1fr))'};
+  grid-template-columns: ${({ $layout }) =>
+    $layout === 'feature-left'
+      ? 'minmax(0, 1.8fr) minmax(0, 1fr)'
+      : 'minmax(0, 1fr) minmax(0, 1.8fr)'};
+  grid-template-rows: repeat(2, minmax(170px, 1fr));
   gap: 24px;
   z-index: 1;
 
   @media (max-width: ${layout.noScaleBreakpoint}px) {
-    width: min(
-      calc(100vw - (${layout.pagePadding} * 2)),
-      ${({ $singleItem }) => ($singleItem ? layout.compactMaxWidth : layout.wideMaxWidth)}px
-    );
+    width: min(calc(100vw - (${layout.pagePadding} * 2)), ${layout.wideMaxWidth}px);
   }
 
   @media (max-width: 990px) {
@@ -164,7 +157,6 @@ export const SMediaCluster = styled.section<MediaClusterProps>`
 type MediaCardProps = {
   $size: 'large' | 'small';
   $layout: 'feature-left' | 'feature-right';
-  $singleItem: boolean;
 };
 
 export const SMediaCard = styled(Squircle)<MediaCardProps>`
@@ -178,10 +170,8 @@ export const SMediaCard = styled(Squircle)<MediaCardProps>`
     0 28px 56px rgba(0, 0, 0, 0.24),
     0 10px 18px rgba(0, 0, 0, 0.12);
 
-  grid-row: ${({ $size, $singleItem }) =>
-    $singleItem ? 'auto' : $size === 'large' ? '1 / span 2' : 'auto'};
-  grid-column: ${({ $size, $layout, $singleItem }) => {
-    if ($singleItem) return '1';
+  grid-row: ${({ $size }) => ($size === 'large' ? '1 / span 2' : 'auto')};
+  grid-column: ${({ $size, $layout }) => {
     if ($size === 'small' && $layout === 'feature-left') return '2';
     if ($size === 'small' && $layout === 'feature-right') return '1';
     if ($layout === 'feature-left') return '1';

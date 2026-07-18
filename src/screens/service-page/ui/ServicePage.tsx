@@ -72,16 +72,14 @@ const renderTextCard = (block: IServiceTextCardBlock, key: string) => {
 
 const renderMediaCluster = (block: IServiceMediaClusterBlock, key: string) => {
   const [featuredItem, ...secondaryItems] = block.items;
-  const isSingleItem = block.items.length === 1;
 
   return (
-    <SMediaCluster key={key} $layout={block.layout} $singleItem={isSingleItem}>
+    <SMediaCluster key={key} $layout={block.layout}>
       <SMediaCard
         cornerRadius={120}
         cornerSmoothing={1}
         $layout={block.layout}
         $size="large"
-        $singleItem={isSingleItem}
       >
         <SMediaImage src={featuredItem.src} alt={featuredItem.alt} />
       </SMediaCard>
@@ -93,7 +91,6 @@ const renderMediaCluster = (block: IServiceMediaClusterBlock, key: string) => {
           key={`${key}-${item.alt}`}
           $layout={block.layout}
           $size="small"
-          $singleItem={false}
         >
           <SMediaImage src={item.src} alt={item.alt} />
         </SMediaCard>

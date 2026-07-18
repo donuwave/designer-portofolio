@@ -234,6 +234,16 @@
                 ]
               }
             ]
+          },
+          {
+            "type": "media-cluster",
+            "layout": "feature-left",
+            "items": [
+              {
+                "src": "/uploads/services/file.png",
+                "alt": ""
+              }
+            ]
           }
         ]
       }
